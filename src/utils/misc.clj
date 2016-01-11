@@ -17,6 +17,16 @@
   "call a particular dispatch on a multi method"
   `((get (methods ~(first expr)) ~disp-val) ~@(next expr)))
 
+; https://groups.google.com/forum/#!topic/clojure/GAGF38uI1-o
+; by James reeves
+
+(defn- merge-meta!
+  "Destructively merge metadata from a source object into a target."
+  [source target]
+  (.setMeta target
+            (merge (meta source)
+                   (select-keys (meta target) [:name :ns]))))
+
 (defn immigrate
   "Add all the public vars in a list of namespaces to the current
   namespace."
