@@ -45,3 +45,6 @@
 (defn >> [& xs] (apply comp (reverse xs)))
 
 (defn applied [f] (fn [vargs] (apply f vargs)))
+
+(defn wrap-fn [x]
+  (if (fn? x) x (constantly x)))
