@@ -5,3 +5,6 @@
   ([sym e] (vary-meta e assoc :type sym)))
 
 (defn t? [sym e] (= sym (t e)))
+
+(defn types [& args]
+  (mapv type args))
