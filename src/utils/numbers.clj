@@ -6,10 +6,16 @@
 (defn mod12map [coll] (map mod12 coll))
 (defn abs [x] (if (neg? x) (* x -1) x))
 (defn rand-int-between [a b] (rand-nth (range a b)))
-(defn div-mod [x div] [(int (/ x div)) (mod x div)])
 (defn int-div [x div] (int (/ x div)))
 (defn same-sign? [x y] (pos? (* x y)))
 (defn dist [x y] (abs (- x y)))
+
+(defn divmod [mod x]
+  (let [r (rem x mod)
+        n (int (/ x mod))]
+    (if (neg? r)
+      [(- n 1) (+ r mod)]
+      [n r])))
 
 (defn median
   ([coll] (/ (reduce + coll) (count coll)))
