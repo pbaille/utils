@@ -1,4 +1,4 @@
-(ns utils.futils_test
+(ns utils.futils-test
   (:require [clojure.test :refer :all]
             [utils.futils :refer :all]))
 
