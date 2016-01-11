@@ -113,3 +113,14 @@
         of-type-tx? #(instance? tx %)]
     (filter #(not of-type-tx?)
             (rest (tree-seq of-type-tx? seq x)))))
+
+(defn repeater
+  "(repeater [[2 [3 [2 :foo] :bar] :woz] :bim [2 :yo]])
+  => (:foo :foo :bar :foo :foo :bar :foo :foo :bar :woz :foo
+      :foo :bar :foo :foo :bar :foo :foo :bar :woz :bim :yo :yo)"
+  [coll]
+  (mapcat (fn [[n & els]]
+            (if (count= els 1)
+              (repeat n (first els))
+              (apply concat (repeat n (mapcat #(repeater [%]) els)))))
+          (map #(if (vector? %) % (vector 1 %)) coll)))
